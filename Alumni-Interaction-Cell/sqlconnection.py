@@ -48,7 +48,7 @@ def adminEvent():
         mysql.connection.commit()
         cursor.close()
         # return redirect(url_for('#adding events'))      
-    return render_template('Events.html')  
+    return render_template('EventsRegister.html')  
 
 # admin login
 @app.route('/adminLogin', methods=['POST','GET'])
@@ -99,6 +99,17 @@ def signupA():
         cursor.close()
         return redirect(url_for('Main'))
     return render_template('alureg.html')
+
+
+# to display event
+@app.route('/events',methods=['POST','GET'])
+def Events():
+    cursor = mysql.connection.cursor()
+    cursor.execute("SELECT * FROM Events")
+    # mysql.connection.commit()
+    result=cursor.fetchall()
+    cursor.close()
+    return render_template('Events.html',data=result)
 
 
 
