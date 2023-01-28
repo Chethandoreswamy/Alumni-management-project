@@ -1,0 +1,100 @@
+<!-- {% extends 'base.html' %}
+{% block title %}
+Student Details
+{% endblock title %} -->
+
+
+
+{% block body %}
+ <h3 class="text-center"><span>Student Details</span> </h3>
+  
+{% with messages=get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+
+<div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+    {{message}}
+
+
+</div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+<br>
+
+
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">rollno</th>
+
+      <th scope="col">NAME</th>
+      <th scope="col">EMAIL</th>
+      <th scope="col">SEM</th>
+      <th scope ="col">BRANCH</th>
+
+      <th scope="col">address</th>
+      <th scope="col">APPROVE</th>
+
+    </tr>
+  </thead>
+  <tbody>
+  {% for post in query %}
+    <tr>
+      <th scope="row">{{post.rollno}}</th>
+      <td>{{post.sname}}</td>
+      <td>{{post.email}}</td>
+      <td>{{ post.sem}}</td>
+      <td>{{post.branch}}</td>
+      <td>{{ post.address}}</td>
+    <!-- <td><a href="/edit/{{post.id}}"><button class="btn btn-primary">Edit </button> </a> </td>
+    <td><a href="/approve/{{post.id}}"><button onclick="return confirm('Are you sure to approve data');" class="btn btn-danger">Approve </button> </a> </td> -->
+    <!-- <td><form action=" " method="POST"><button class="btn btn-primary">Edit </button> </a> </td> -->
+    <!-- <td><button onclick="return confirm('Are you sure to approve data');" class="btn btn-danger">Approve </button> </a> </td>
+  </form> -->
+  <td><a href="/approve/{{post.rollno}}"><button onclick="return confirm('Are you sure to approve data');" class="btn btn-danger">Approve </button> </a> </td>
+{% endfor %}
+  
+  </tbody>
+</table>
+
+
+<div>
+  
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">NAME</th>
+      <th scope="col">EMAIL</th>
+      <th scope="col">linkedin</th>
+      <th scope ="col">company</th>
+
+      <!-- <th scope="col">about</th> -->
+      <th scope="col">APPROVE</th>
+
+    </tr>
+  </thead>
+  <tbody>
+  {% for post in data %}
+    <tr>
+      <td>{{post.name}}</td>
+      <td>{{post.email}}</td>
+      <td>{{post.linkdin}}</td>
+      <td>{{ post.company}}</td>
+    <!-- <td><a href="/edit/{{post.id}}"><button class="btn btn-primary">Edit </button> </a> </td>
+    <td><a href="/approve/{{post.id}}"><button onclick="return confirm('Are you sure to approve data');" class="btn btn-danger">Approve </button> </a> </td> -->
+    <td><a href="/approvefor/{{post.name}}"><button onclick="return confirm('Are you sure to approve data');" class="btn btn-danger">Approve </button> </a> </td>
+  </tr>
+{% endfor %}
+  
+  </tbody>
+</table>
+
+</div>
+
+
+
+
+
+
+{% endblock body %}
